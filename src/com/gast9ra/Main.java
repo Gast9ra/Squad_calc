@@ -8,6 +8,7 @@ public class Main {
     public static void main(String[] args) throws Exception {
         Scanner read = new Scanner(System.in);
         System.out.println("Пример: A1-3-5-1");
+        map("a1-1-1-1,s1-2-9-9");
         while (true) {
             System.out.println("Введите начальную точку");
             String first = read.nextLine();
@@ -20,7 +21,6 @@ public class Main {
     private static void map(String position) {
         String[] points = position.toLowerCase().split(",");
         DotMap start = new DotMap(points[0]);
-        System.out.println(8 % 3);
         DotMap finish = new DotMap(points[1]);
         System.out.println("Дистанция");
         System.out.println(distans(start.getDot(), finish.getDot()));

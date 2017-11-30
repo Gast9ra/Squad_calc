@@ -1,19 +1,19 @@
 package com.gast9ra;
 
-public class Point {
+class Point {
     private int x;
     private int y;
 
-    public Point(int X, int Y) {
+    Point(int X, int Y) {
         this.x = X;
         this.y = Y;
     }
 
-    public int getX() {
+    int getX() {
         return x;
     }
 
-    public int getY() {
+    int getY() {
         return y;
     }
 }
