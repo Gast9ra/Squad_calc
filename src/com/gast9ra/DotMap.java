@@ -17,6 +17,7 @@ class DotMap {
         for (int i = 0; i < abc.length; i++) {
             if (abc[i].equals(allOrdinat[0].substring(0, 1))) {
                 this.coorWord = i;
+                break;
             }
         }
         this.coorWord1 = Integer.parseInt(strPos.substring(1, 2));
@@ -26,6 +27,7 @@ class DotMap {
         this.secondOrdinate = cubetoOrdinate(secondOrdinate);
         this.thirdOrdinate = cubetoOrdinate(thirdOrdinate);
         this.lastOrdinate = cubetoOrdinate(lastOrdinate);
+        if(coorWord1>0) coorWord1-=1;
     }
 
     private int[] cubetoOrdinate(int[] inputMas) {
@@ -33,17 +35,18 @@ class DotMap {
         else return new int[]{inputMas[0] % 3, inputMas[0] / 3 + 1};
     }
 
-
+// -1 нужен для того чтобы при квадрантыых координатах не переборщить ровно на половну
     Point getDot() {
         int y = coorWord1 * 300
-                + (secondOrdinate[1] - 1) * 100
-                + (thirdOrdinate[1] - 1) * 33
-                + (lastOrdinate[1] - 1) * 11 + 6;
-        int x = (coorWord - 1) * 300
-                + (secondOrdinate[0] - 1) * 100
-                + (thirdOrdinate[0] - 1) * 33
-                + (lastOrdinate[0] - 1) * 11 + 6;
+                + (secondOrdinate[1]-1) * 100
+                + (thirdOrdinate[1]-1) * 33
+                + (lastOrdinate[1]-1) * 11 + 5;
+        int x = coorWord * 300
+                + (secondOrdinate[0]-1) * 100
+                + (thirdOrdinate[0]-1) * 33
+                + (lastOrdinate[0]-1) * 11 + 5;
         return new Point(x, y);
     }
+
 
 }

@@ -4,28 +4,26 @@ import java.util.Scanner;
 
 public class Main {
 
-
     public static void main(String[] args) throws Exception {
         Scanner read = new Scanner(System.in);
         System.out.println("Пример: A1-3-5-1");
-        map("a1-1-1-1,s1-2-9-9");
+       // map("a1-2-6-4","a1-2-1-5");
         while (true) {
             System.out.println("Введите начальную точку");
             String first = read.nextLine();
             System.out.println("Введите цель");
             String second = read.nextLine();
-            map(first + "," + second);
+            map(first , second);
         }
     }
 
-    private static void map(String position) {
-        String[] points = position.toLowerCase().split(",");
-        DotMap start = new DotMap(points[0]);
-        DotMap finish = new DotMap(points[1]);
+    private static void map(String position1,String posiion2) {
+        DotMap start = new DotMap(position1);
+        DotMap finish = new DotMap(posiion2);
         System.out.println("Дистанция");
-        System.out.println(distans(start.getDot(), finish.getDot()));
+        System.out.println(roundTwo(distans(start.getDot(), finish.getDot())));
         System.out.println("Азимут");
-        System.out.println(asimut(start.getDot(), finish.getDot()));
+        System.out.println(roundTwo(asimut(start.getDot(), finish.getDot())));
         System.out.println("_______________");
     }
 
@@ -37,12 +35,16 @@ public class Main {
     private static double asimut(Point dot1, Point dot2) {
         Point dot3 = new Point(dot1.getX(), dot2.getY());
         double deger = Math.toDegrees(Math.atan(distans(dot2, dot3) / distans(dot1, dot3)));
-        if (dot1.getX() - dot2.getX() > 0 || dot1.getY() - dot2.getY() > 0) {
+        if (dot1.getX() - dot2.getX() > 0 && dot1.getY() - dot2.getY() > 0) {
             return 360 - deger;
-        } else if (dot1.getX() - dot2.getX() <= 0 || dot1.getY() - dot2.getY() <= 0) {
+        } else if (dot1.getX() - dot2.getX() <= 0 && dot1.getY() - dot2.getY() > 0) {
             return 0 + deger;
-        } else throw new NumberFormatException();
+        } else if (dot1.getX() - dot2.getX() <= 0 && dot1.getY() - dot2.getY() <= 0){
+            return 180-deger;
+        } return 180 + deger;
     }
+
+    private static double roundTwo(double a){ return (double) Math.round(a*10)/10; }
 
 
 }
